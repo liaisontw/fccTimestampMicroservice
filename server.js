@@ -5,6 +5,12 @@
 var express = require('express');
 var app = express();
 
+var multer = require('multer');
+// here on HyperDev the fs is read only, 
+// You have to upload the file to memory
+var storage = multer.memoryStorage();
+var upload = multer({ storage: storage });
+
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
 var cors = require('cors');
@@ -25,6 +31,15 @@ app.get("/api/hello", function (req, res) {
   res.json(JSON.stringify(req.headers));
   //console.log();
 });
+
+app.post('/api/fileanalyse',upload.single('upfile'), function(req, res){
+   res.json({
+    'name' : req.file.originalname,
+    'type' : req.file.mimetype,
+    'size' : req.file.size
+   });
+});
+
 
 /** Timestamp Microservice */
 app.route("/api/timestamp/:date_string?").get(function(req, res){
