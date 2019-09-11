@@ -21,7 +21,9 @@ app.get("/", function (req, res) {
 
 // your first API endpoint... 
 app.get("/api/hello", function (req, res) {
-  res.json({greeting: 'hello API'});
+  //res.json({greeting: 'hello API'});
+  res.json(JSON.stringify(req.headers));
+  //console.log();
 });
 
 /** Timestamp Microservice */
@@ -47,18 +49,11 @@ app.route("/api/timestamp/:date_string?").get(function(req, res){
     
     res.json(result);
 });
-/*
-app.get("/api/timestamp/:date_string", function(req, res, next) {
-{
-  req.time = new Date(req.params.date_string).toUTCString(); 
-  req.now = new Date().getTime();
-} 
-next();
-}, function(req, res) {
-res.json({"unix": null, "utc" : req.time});
-})
-*/
 
+app.route('/api/whoami')
+  .get(function(req, res){
+    res.json({ipaddress: req.ip, language: req.headers['accept-language'], software: req.headers['user-agent']});
+  });
 
 
 // listen for requests :)
