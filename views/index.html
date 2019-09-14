@@ -12,6 +12,20 @@
    <body>
 
       <div class="container">
+        <h3>Short URL Creation </h3>
+        <form action="api/shorturl/new" method="POST">
+          <label for="url_input">URL to be shortened</label>
+          <input id="url_input" type="text" name="url" value="https://www.freecodecamp.org">
+          <input type="submit" value="POST URL">
+        </form>
+        <h3>Example Usage:</h3>
+        <a href="https://mic-timestamp.glitch.me/api/shorturl/1">
+          https://mic-timestamp.glitch.me/api/shorturl/1
+        </a>
+
+        <h3>Will Redirect to:</h3>
+        <p>https://www.freecodecamp.org/forum/</p>
+        
         <h2>API Project: File Metadata Microservice</h2>
         <p>
           Please Upload a File ...
